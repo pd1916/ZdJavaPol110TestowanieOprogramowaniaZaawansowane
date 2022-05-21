@@ -1,6 +1,7 @@
 package pl.sdacademy.unit.test.advance.exercises.parametrized.csvsource;
 
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvFileSource;
 import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -13,7 +14,6 @@ class PalindromeCheckerTest {
     kajak
     sedes
     kobyla ma maly bok
-
 
     false:
     programowanie
@@ -40,4 +40,12 @@ class PalindromeCheckerTest {
         assertThat(result).isEqualTo(expectedResult);
     }
 
+    @ParameterizedTest
+    @CsvFileSource(resources = "/palindrome.csv")
+    void shouldVerifyIfStringIsPalindrome_CsvFileSource(String input, boolean expectedResult) {
+        //when
+        boolean result = PalindromeChecker.isPalindrome(input);
+        //then
+        assertThat(result).isEqualTo(expectedResult);
+    }
 }
